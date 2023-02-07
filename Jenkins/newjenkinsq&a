@@ -1,0 +1,208 @@
+1. which tool have you used for implement CI/CD ? : Jenkins
+
+2. Any alternate tool do you know for CI/CD ? : Bamboo , udeploy , team city
+
+3. what is Continuous Integration? : pipeline https://www.jenkins.io/doc/book/pipeline/ like 
+ get scm --> compile --> test --> build --> static code anylsis --> artifactoy --> if build fail get the mail
+
+4. what type of jobs have you configured in jenkins? :  freestyle, maven,pipeline,multibranch pipeline
+5. what are the types of jobs are available in jenkins? : freestyle, maven,pipeline,multibranch pipeline
+6. what is difference b/w freestyle and pipeline? 
+
+freestyle project is implementing, developing, or running simple jobs such as enabling you to specify the version control system from where you need to extract code and build it and call tests. Freestyle projects are for orchestration simple jobs for a project
+
+pipelines enable you to define the whole application lifecycle. Pipeline functionality helps Jenkins to support continuous delivery
+
+7. what is pipeline? :
+
+Pipeline enable multiple stages of functionalioty like installation of softwware,containerzation,testing , deploy ..etc
+
+8. what is declarative pipeline? 
+
+In Declarative Pipeline syntax, the pipeline block defines all the work done throughout your entire Pipeline.
+
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any 
+    stages {
+        stage('Build') { 
+            steps {
+                // 
+            }
+        }
+        stage('Test') { 
+            steps {
+                // 
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                // 
+            }
+        }
+    }
+}
+Execute this Pipeline or any of its stages, on any available agent.
+Defines the "Build" stage.
+Perform some steps related to the "Build" stage.
+Defines the "Test" stage.
+Perform some steps related to the "Test" stage.
+Defines the "Deploy" stage.
+Perform some steps related to the "Deploy" stage.
+
+9. what is difference between  declarative pipeline and script based pipeline?
+scripted base pipeline start with 
+Scripted Pipeline)
+node {
+}
+Its is goovy script as their domain spectific language
+and declarative pipeline start with 
+pipeline {
+    agent any 
+    stages {
+	
+	Its provide simple and friendly syn to define pipelein.Its have pipeline blocks.
+https://www.jenkins.io/doc/book/pipeline/
+
+10. write the pipeline syntax?
+https://www.jenkins.io/doc/book/pipeline/
+11. what is master/slave architecture? what is the use of master/slave?
+
+Jenkins uses a Master-Slave architecture to manage distributed builds. In this architecture, Master and Slave communicate through TCP/IP protocol.
+Jenkins Master
+
+Your main Jenkins server is the Master. The Master’s job is to handle:
+Scheduling build jobs.
+Dispatching builds to the slaves for the actual execution.
+Monitor the slaves (possibly taking them online and offline as required).
+Recording and presenting the build results.
+A Master instance of Jenkins can also execute build jobs directly.
+
+Jenkins Slave
+A Slave is a Java executable that runs on a remote machine. Following are the characteristics of Jenkins Slaves:
+It hears requests from the Jenkins Master instance.
+Slaves can run on a variety of operating systems.
+The job of a Slave is to do as they are told to, which involves executing build jobs dispatched by the Master.
+You can configure a project to always run on a particular Slave machine or a particular type of Slave machine, or simply let Jenkins pick the next available Slave.
+
+12. How many we can connect the slaves?
+ 4 ways 
+	a. Launch agent via ssh
+	b. launch the agent via java webstart
+	c. launch the agent via excution of command on master.
+	d. lets jenkins control the window slave as a window services
+
+13. How many ways we can provide security for your jenkins server?
+		1. authication
+		2. autthization 
+		3. security relam 
+			Core Jenkins supports four security realms: 
+				a. delegate to servlet container, 
+				b.Jenkins's own user database, 
+				c. LDAP, and 
+				d. Unix user/group database
+		4. Role based access control
+
+14. what is sonarqube ? have you configure ? How you configure ?
+
+SonarQube is an open-source platform, which is used for continuous analysis of source code quality by performing analysis on your code to detect duplications, bugs, security vulnerabilities and code smells on programming languages.
+
+After successfully completing integration proceIntegration.ss we need to install the sonar scanner which goes through the code and analysis. SonarScanner lets users centralize the configuration of SonarQube server connection details in Jenkins global tool configuration.
+
+we need sonar server and sonar scanner . where we configured sonnar server in configured system and config global tool level we can config scanner .we need add property sonner.properies wecan menstion which type of project and which folder need to anayasis 
+15. what type of artifactory repository tool have you used? 
+jfogg/own arictaory/s3
+16. what is the use of artifactory tools? 
+ to store the mutiple version and manager diffeernet version as we required . like java 1.6 and 1.7 and 1.8 we can use differnst versions for different pipe line 
+17. How you declare a variables in pipeline?
+	in pipeline starting you can delare 
+	pipeleine {
+		envionment{
+			}
+			}
+18. what is DSL language? domain spcific language?
+	goovy . in pipeline what we menstion syntax way 
+19. what is upstream/downstream projects? what is the use of it? which scenario you configure?
+dependies which one start first then what we excute .
+20. If a have 10 repositories i github how many jobs you can configure?
+10
+21. Dou you have experience to install jenkins?: yes
+22. How you configure jdk,maven,gradle...etc? :  manage jenkins --> global tool configuration
+23. In my environment i have different version for java implementation projects is there ? How you configure multiple jdk's?
+mange jenkins --> global tool config --> add no of jdks
+24. what are the plugins have you used in your project?
+	1) Git plugin for Jenkins. ...
+	2) Jira plugin for Jenkins. ...
+	3) Kubernetes plugin for Jenkins. ...
+	4) SonarQube Plugin for Jenkins. ...
+	5) Docker plugin for Jenkins. ...
+	6) Maven Integration Plugin for Jenkins. ...
+	7) Amazon EC2 Plugin for Jenkins. ...
+	8) Build Pipeline Plugin for Jenkins.
+25. How to take backup my jenkins? thin backup plugin
+>$home/.jenkins folder
+26. what is jenkins Home directory?  .jenkins
+27. How to deleted old builds automatically?
+	configuration --> discard old build --> give how many you need 
+28. How to configure multiple environment deployment?
+
+	https://www.jenkins.io/doc/book/pipeline/
+
+29. Automatic manuval process with jenkins pipeline :
+	excuting some scripts and installing some packages , updating pacthes ,stop and start specific service 
+30. Migration free style to pipeline :
+	a. Navigate to the Freestyle project.
+	b. Select To Declarative in the left navigation menu from the Freestyle project’s page.
+	c. Once the conversion is complete, a Jenkinsfile will be provided for review.
+31. adding mutlple stage in existing pipeline :
+	using of scipt pipeline or declarative pipeline we add more steps like build docker d=file , push artifactory ..like that.
+32. Upgrade jenkins pipline and install and config plugins 
+	Check stable version and pulgin before upgade and also just how to upgrade either using container and jenkins as service . our case we went war file jenkin installation so how we can do 
+	1. stop jenkins server
+	2. take backup jenkis home direactory
+	3. donwload newer jenkins update war file
+	4. just repalce old to newer and its jenkins home directory 
+	5. then start jenkins server and monitor logs 
+33. Adopting and implementing best pratice in jenkins 
+	clearing build logs
+	timeout
+	share lib --> one location you updated required update through jenins update all
+34. What is jenkin file ?
+
+	jenkin file is text file that contains the defination of jenkins pipeline and chceked into source code repository.
+35. What is command use to runs jenkins from command line ?
+	java -jar jenkins.war 
+36. what are key aspects of jenkins pipeline ?
+	pipeline : user defind model of CD pipeline . its define entire build process
+	node: which server
+	step : what to do that perticualr point
+	stage: build,test,deploy stages
+37. How to deploy custom build 	of core plugin ?
+	a. copy the .hpl to $JENKINS_HOME/Plugins 	
+	b. remove the plugin 's dev direactory
+	c. create empty file called plugin.hpl.pinned 
+	d. restart the jenkins
+38. how can you tempoary turnoff jenkins security if admin user lock themself out  of admin console ?
+	in jenkins_home --> config.xml change security --> true to false and restart.
+39. what are the ways build can run in jenkins ?
+	a.By source management commit
+	b. After completion of other build
+	c. schdeule run at specific timeout
+	d. manuval build requests
+40. What are types of jobs in jenkins ?
+	freestyle project
+	mavin project
+	pipeline
+	multibranch pipeline
+	multicongiuration project
+41. Explain your ci/cd setup ?
+	In current organization  We use GITHUB as source Source code repository . We have configures a github webhook that trigger a jenkins pipelione on every commit . The jenkins pipeline is setup with multi stages 
+	
+	1. Build stage : take acre of statc code an   unit testing and build
+	2. Test stage : Running smoke and functional test 
+	3. Depoly : publish artifactory to registry  prepare deplo  manifest abd depl on cluster.
+42. How do you handle secrets ?
+
+	Depend on envionment we will use tools like Hashicorp valut,, AWS systems manager, Azure vault
+	
+	
