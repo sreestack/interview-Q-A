@@ -1,0 +1,62 @@
+#Linux
+
+1. man journalctl --> to logs in linus level
+2. ls --full-time --> to show full time of file creation 
+3. grep -i 'option' path
+4. egrep -r '/dev/[a-z]*' /etc/
+5. cat opp tac 
+6. head filename --> to see first few lines
+7. tail -n 20 filename --> last 20 lines
+8. sed 's/see/sree/g' userinfo.txt -->to replacement
+9. cut -d ',' -f 1 userinfo.txt -->to separate of 1 line in userinfo
+10.sort filename | uniq --> to show uniq files
+11. diff file1 file2
+	diff -c file1 file2 --> diff of two files with ' content 
+	diff -y file1 file2 or sdiff file1 file2 
+12. ls l?to.txt --> to find list of file that letter
+13. grep '^sree' filename --> The file name start with sree
+14. grep 'sree$' filename --> ending letter as sree
+15. grep -wr 'c.t' filename --> matching the word
+16. egrep -r '0{3,}' filename --> matching 3zero's 
+	egrep -r 'http[^s]' filename --> to dispaly the http/https
+17	egrep -ir 'enable?|disable?' filename --> match either one 
+18 gunzip  file name & gzip --decompress file1.gz 
+	tar -cvzf sree.gz /home/sree
+19. rsync 
+20. find . -name *.bak -size +1G -- file more than 1GB
+21. grep -r '^The' /etc/ 2>/dev/null/error.list --write error files to diff area
+22. lsof -p 8401 --> list of process running on that port
+23. Explain the difference between grep and egrep
+	
+	The egrep command is a shortcut for the grep binary, but with one exception: when grep is invoked as egrep, the grep binary activates its internal logic to run as if it were called as grep -E.
+
+	The difference is that -E option enables usage of extended regexp patterns. This allows use of meta-symbols such as +, ? or |.
+	
+	So, for example, you want to list files in a directory and see only those which contain "mp4" or "avi" as filename extensions. With egrep you will do:
+
+		ls | egrep "mp4|avi"
+24. List 3 different methods of adding user?
+	useradd: Create a new user or update default new user information.
+	adduser: Create a new user with all default parameters or update default new user information.
+	newusers: update and create new users in batch.
+25. What is the difference between nslookup and dig commands?
+
+	dig uses the OS resolver libraries. nslookup uses is own internal ones.
+26. How to check the total number of partition in Linux?
+
+	fdisk -l
+27. how to chcek swap memeory ?
+	grep Swap /proc/meminfo
+28. How to check inode value ?
+	df -i filename
+29. List any 4 commands to monitor system?
+	top, df –h, iostat, dmesg
+30. Why do we use “last” command?
+	To see who has logged in the system whether active or logged off
+	
+	
+
+	
+
+
+
