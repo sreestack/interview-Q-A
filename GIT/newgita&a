@@ -1,0 +1,265 @@
+1. How to save credential in git 
+we many mainly two ways 
+		a.  git config --global credential.helper store
+		
+			once you run then push any content normaly then this will create one new file in $home/.git-credentials location and save credetial.One more thing $home/.gitconfig location will update [credential] helper = store
+			So automatcally will take credential ,
+
+			suppose you want erase the credential
+			
+			git config --global credential.helper erase	
+
+		b. just save .rsa_pub info in github/ssh and gpgkeys area and update global url from https to git meand git config --global url clone-url . This one also does not need any auth
+		
+2. how to mimic with two branch or how to up to date of future brnach to master branch ?
+
+			a. first go to branch 
+			b. git fetch --all --prune
+			c. git reset --hard origin/master ( source branch)
+			d. git log 
+			e. git push origin master 
+3. git remote add upstream url :
+4.git reset --hard upstream/master
+5.git remote add origin url
+6.git reset --hard upstream/master
+7.git fetch --all --prune ( fetch even delete one also)
+8.git pull upstream brachname
+9.git restore --staged <file>
+10.git stash ( after add the files in staing before commit)
+11.git stash pop ( to come back normal)
+12.git stash clear 
+13.git checkout -b master3 ( create the branch and chcekout)
+14.git push origin master -f ( to override)
+15. how to combine multiple commits to single 
+	git log 
+	git rebase -i  id 
+	:x ( update message then :x)
+16. git reset --hard id ( its errase above commits)
+17. merge confilct --> if we try to edit same line two members first its dispaly the megrge issue then you have edit manuvally then merged . that how you have reslove the issue .
+18. How to merge and delete branch 
+	first merge the two branches 
+		1. chcek out to master
+			git chcek out master
+		2. merge the branch 
+			git merge master4(second branch)
+		3. Update the master branch
+			git push origin master -f
+		4. delete from local
+			git branch -d master4
+		5. delete from remote
+			git push origin --delete master4
+			
+19. If you want tag perticular commit or push 
+	git tag tagname
+	git tag -a tagname -m "comment" ( to create tag and update)
+	git tag 
+	git show Tagname (to shhow list of tage)
+	git tag -d tagname ( to delete the tag)
+20. git fetch :
+			Its only download latest chaange to loacl repo . Its download fresh changes other dev push to remote repo.since fetch allow to review and merge manuvally at time using git merge.
+	git pull : download latest changes to loacl repo and automatically merge.		Its	doesn give a change to review before merge.one imp point its merge only current branch not all branches .
+		
+	git pull = git fetch + git merge
+21. Git cherry-pick :
+		choose a commit from branch and apply another branch 
+		git cherry-pick <commit-hash>
+		ex: go to master brach create sree.txt and git log take commit-hash and chcekout master2 branch the git cherry-pick id . it will carete sree.txt file.
+22. git revert,reset, chcekout
+	git checkout : If one file existing in staging and you added some content 
+					means modify . 
+					After some time you feel the content what you added not required . that time you can use git chcekout . Its almost redo of one file . this is useful before run the add and  after modify the file.
+	ex: git checkout <filename>
+	git reset :	One file edit and add then commit . After commit you see the id in 
+				logs. If you want move staging status then you can use git reset. Means once you commitagain move back staging .
+	ex: git reset id
+	
+				you can remove only recently added
+				you can remove spcific commit
+				you remove only local commit
+				3 different types(soft,mixed,hard)
+		soft:
+			it only remove recent commit
+			it will not remove changes from staging 
+			git reset --soft head~1/2/3
+		mixed:
+			it only remove local recent commit & remove changes from staging also
+			it is default model of reset
+			git reset --mixed head~1/2/3 or git reset head~1/2/3
+		hard:
+		 it remove changes from local recent commit, remove changes from stage, & remove from working directory 
+		 [ chcekout +git reset head file + git reset head~1/2/3]
+		 git reset hard head~1/2/3
+		
+	git  revert:
+		used to revert changes that did on specific commit
+		it will not affetct past comment history
+		git revert <coomit-id>
+		
+	
+	
+23. git log --oneline
+24. GIT stash drop ( to delete data from stroge stash)
+	Difference b/w drop and clear is clear will clear all exiting stash but drop will clear only previoues one.
+25. git branch --merged  ( to show mergebrach details)
+26. git branch --no-merged ( to show not merged details)
+27. git commit --amend (How can you fix a broken commit)
+28. git bisect good ( To chcek good or bad comment)
+29. git diff-tree -r id ( to show modify file list for this commit)
+30. git clone --single-branch -b master githublink ( to download single branch)
+	if you want chcek time --> time git clone --single-branch -b master githublink 
+31. How to upgrade commits& history from github to gitlab 
+	a. first download --> git clone --bare githublink
+	b. pushed to gitlab --> git push --mirror gitlablink
+32. git clone --single-branch -b master --depth 1 githubline -->one commit you want download/clone
+33. git clone --single-branch -b master --depth 1 githubline flodername --> to download to spcific folder
+34. git clone --single-branch -b master --depth 1 --reference /localfoldername/ githublink  --> to save the time of download we can download ealier and refernece of local folder . if anything new update it will take github
+
+======================================================
+35. what braching strategy used
+36. How you make the push rules , access level grants 
+37. what is git pull and git fetch difference 
+38. what is git stash and git rebase 
+39. what is git revert 
+40. what is cherry pick
+41. How you reslove the merge conflicts
+42. what is git clone 
+43. How you designed your gitlab CI
+44. what is diff b/w gitlab and github
+45. How the jenkins talks with gitlab
+46. Adding a remote repository --> git remote add name url 
+									ex: git remote add origin /tmp/helloworld.git
+47. how to push --> git push origin branch (ex: git push origin master)
+
+48. git fetch
+git fetch updates the local mirror of the remote repository:
+• it downloads the new commits from the remote repository
+• it updates the references remote/remote name/* to match
+their counterpart in the remote repository.
+Example: the branch remote/origin/master in the local
+repository is updated to match the new position of the branch
+master in the remote reposity
+
+
+Version Control GIT Intro Local GIT Branches Remote GIT Server Bazar Extras
+Merging remote changes into the current local branch
+Changes in the remote repository can be merged explicitely into
+the local branch by running git merge
+
+$ git status
+# On branch master
+$ git fetch
+...
+$ git merge origin/maste
+
+49. git clone is a shortcut for the following sequence:
+	1. git init directory
+	2. cd directory
+	3. git remote add origin url
+	4. git fetch
+	5. git checkout master
+50. Diff b/w git pull and git clone
+
+51. git init --bare --shared my-shared-repository.git
+• A bare repository (--bare) is a repository without any
+working copy.
+• by convention bare repositories use the .git extension
+• bare repository are updated by importing changes from another
+repository (push operation)
+• --shared is meant to make this repository group-writable
+(unix group)
+✞ ☎
+$ git init --bare --shared helloworld.git
+Initialized empty shared Git repository in /tmp/helloworld.git/
+$ ls helloworld.git/
+branches config description HEAD hooks info objects refs
+
+52. Reviewing a remote branch
+
+git pull merges immediately the remote branch into the current
+local branch.
+
+In practice you may prefer to review it before merging.
+
+git fetch url branch
+
+→ fetch the branch branch from the repository url and store it
+temporarily16 as FETCH HEAD
+
+$ git fetch git://git.raoul-duke.org/helloworld.git master
+From git://git.raoul-duke.org/helloworld.git
+* branch master -> FETCH_HEAD
+$ gitk FETCH_HEAD
+...review the commits ...
+$ git merge FETCH_HEAD
+
+51.How will you know in GIT if a branch has been already merged into 
+master?
+❖ Git branch—merged lists the branches that have been merged into the current branch
+❖ Git branch—-no merged lists the branches that have not been merged
+
+
+52. Configuring git for the first time :-
+	$ git config --global user.name “<Enter your username here>”
+	$ git config --global user.email “<Enter your email here>”
+53. 
+		$ git remote add origin <paste copied URL here>
+	‘git remote add origin <URL>’ 
+	
+	specifies that we are adding a remote 
+repository, with the specified URL, as an origin to our local Git repo.
+Finally, pushing our master branch to the origin URL (remote repo) 
+and set it as the default remote branch.
+
+$ git push --set-upstream origin maste
+
+ git push origin master
+
+-------------------------------------------------------------
+You may have multiple variants of the same software, materialised
+as branches, for example:
+• a main branch
+• a maintainance branch (to provide bugfixes in older releases)
+• a development branch (to make disruptive changes)
+• a release branch (to freeze code before a new release)
+
+----------------------------------------------------
+
+if same file modify in two branches means if you merge two branches then try to modify file in differnet braches area its get confict error.
+
+There are two ways to resolve conflicts:
+• either edit the files manually, then run
+git add file → to check the file into the index
+or
+git rm file → to delete the file	
+
+git mergetool [ file ]
+
+ex:
+
+p-172-31-82-130 cicd-pipeline-train-schedule-docker]# git mergetool bug2
+
+This message is displayed because 'merge.tool' is not configured.
+See 'git mergetool --tool-help' or 'git help config' for more details.
+'git mergetool' will now attempt to use one of the following tools:
+tortoisemerge emerge vimdiff nvimdiff
+Merging:
+bug2
+
+Normal merge conflict for 'bug2':
+  {local}: modified file
+  {remote}: modified file
+Hit return to start merge resolution tool (vimdiff):
+4 files to edit
+
+
+
+
+
+
+
+
+					
+					
+				
+
+		
