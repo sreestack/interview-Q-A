@@ -1,0 +1,145 @@
+1. Daily activities that you do in Terraform?
+	Its not like we are work on daily task its all about requirement from application . As LAC we are doing tasks
+2. What are services that you have worked with and wrote terraform files?
+	we have worked all main service include ec2,vpc,s3,sns,sqs,lambda,loadbalnce,dynamobd .. more over 30+ service .
+3. Tell me a scenario where you come across provisioners?
+	few days back request cam like they need harchicorp valut enable virtual mechines ,by that time provisioners come to pic , we have differnt type of provisioners maily file,remote-exec,local-exec  ..etc. use of provisioners we carete custom image .
+4. What are plugins and providers in terraform?
+	Its depend on provider what we select then respective plugins will install . So plugins are support liberies of provideds .
+5. How do you deploy the terraform code manually or with some automation? Have configured locks on the backend statefile?
+	we will store our erraform code in application repository . Using pipeline we can deploy . we are using gitlab and concourse . 
+6. When you want to deploy the same terraform code on different env then what is the best strategy?
+	We will use separate branch for implement before release/mearge we will dicuss internally and do code review once scam call got approval then we can schdeule .
+7. How do you standardize terraform code so that can be shared across multiple teams in an organization?
+	terraform state file locking concept is there . So once you excution terraform untill first task completed you cant re-run again.
+8. How do you call output of one module in another module?
+	We need to define output variable in module in the name of output.tf name then in other module you can refer that vlue in ref module.nameofmodule.outputvalue
+9. Lets say you have created lot of resources using terraform out of is there way to delete one the resource through Terraform?
+	terraform state list --> its will list all resource provisoned by terraform
+	terraform taint resource name --> its will delete both cloud in terradform code
+	tearrforom rm resoucename -> it will delete only in code
+	
+10.Can we merge 2 different state files?
+	we cant merge two state files.
+11. Few challenges that you came across while working with Terraform?
+	while application team do any manuval changes on the fly that craete big mash
+12. Best way to authenticate cloud providers through Terraform?
+	 we have many ways best way insated of using individual credetial use service priniciple to maintain crentail of access
+13. Lets assume 2 resources you are creating using terraform, but we need make sure once 1st resource created successfully then only need to start creating 2nd resource. Is this possible?
+	yes. using of depends_on 
+14. What is null resource in terraform?
+	The Terraform null_resource is commonly used to run scripts on a specified trigger
+15. What happens if statefile is missed or delete?
+	if we lost we cant recover state files. Best pratice maintain remote area 
+16. Can terraform used for automating on prem infra?
+	yes , we can use terraform in on-prem also
+17. What if we encounter a serious error and want to rollback?
+	we can tag and do  it
+18. How to call existing resources from AWS or Azure to terraform without hardcoding the values or terraform import?
+	use of datatype resouce
+19. If we give count zero in resources level what will happen?
+	ignored by terraform 
+20. What is Dynamic Block in terraform?
+	for_each . suppoese you want create list of cosomodb with diffent names for each time you need to run if you give for-each it will take care.
+	
+21. Best Practices in Terraform?
+	a. make you application into modules its easy way to manage
+	b. always maintain stable code
+	c. write miminal code everyone understand
+	d. keep your state file in remote area
+	e.restict access every one terraform apply 
+22 . tearraform version what you are using ?
+	1.29 and 1.32
+23. If Two devlopers work on single and one person used terrform apply and went for vaction and second person not bez of locking . So the second member take id of dynamo-db area and take id use force-unlock . 
+	terraform Force-unlock id 
+24. How we can list of resourec created using of terraform 
+	terraform state list 
+25. how to syn statefile and existing resource ?
+	terraform refresh 
+26. If you write code for vpc,subnet,ec2,loadbalnce ans s3 . but you want create only s3 on entier code . What you can do 
+	terraform apply -target=aws_s3_bucket.b (use target command and spcific only require thing)
+27. if you want create select code in long code format like above what you can do ?
+	Just select multiple target.
+	terraform apply -target=aws_vpc_default -target=aws_subnet.public-subnet
+	gitlink --> github.com/DeekshithSN/terraform
+
+	same thing applicable in destroy also
+	terraform destory -target=aws_s3_bucket.b
+	
+28. How you can maintain environments in terraform ?
+	Using of workspace we can maintain .
+	
+	terraform workspace new Dev ( create separate env )
+	terraform workspace show ( to chcak current workspace)
+	once you apply terradform automacatlly terradform.tfstate file will create in env/Dev/Terraform.tfstate area.
+	terradform workspace select dev ( if you want swift different workspace)
+	terradform workspace delete dev ( to delete workspace)
+29. What is use of terraform console commmand ?
+
+	terraform console aws_s3_bucket.data
+
+	If you want find certain resourec info this console command will help you out.
+30. file provisioners ?
+		copy the file from local to server while cretion time 
+31. remote provisioners ?
+	The remote-exec provisioner invokes a script on a remote resource after it is created. This can be used to run a configuration management tool
+	on_failure = continue --> even remote-exec one step fail then also run.
+32. local-provisioners ?
+
+	to save the values local and send to another as per requirement.
+32. How you can maintain credentail for aws in terraform ?
+	onfiguration for the AWS Provider can be derived from several sources, which are applied in the following order:
+
+	a. Parameters in the provider configuration
+	b. Environment variables
+	c. Shared credentials files
+	d. Shared configuration files
+	e. Container credentials
+	f. Instance profile credentials and region	
+33. What is flow of terraform implementaion ?
+	a. terraform init --> while apply the terraform init its download required provides what we highlated in providers blaock under .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦 folders these are will create and also .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐥𝐨𝐜𝐤.𝐡𝐜𝐥 file will create in the contain of providers and terraform communication info certificate( aws)
+	
+	b. terraform validate --> The terraform validate command validates the configuration files in a directory, referring only to the configuration and not accessing any remote services such as remote state, provider APIs, etc.
+	
+	c. terraform plan : Once we plan api integrate we carete draft version what we are creating using of this config.Lets you to preview the actions Terraform would take to modify your infrastructure, or save a speculative plan which you can apply later. The function of terraform plan is speculative . while excution  time .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐥𝐨𝐜𝐤.𝐢𝐧𝐟𝐨 we create and diapper after terraform plan command excuted .
+	
+	d. terraform apply : Creates or updates infrastructure depending on the configuration files. By default, a plan will be generated first and will need to be approved before it is applied. terraform apply -auto-approve — Apply changes without having to interactively type 'yes' to the plan.
+		
+	while excution  time .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐥𝐨𝐜𝐤.𝐢𝐧𝐟𝐨 wile carete and once we give " yes" 
+	and terraform apply command complete its disapper and create another file 𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞 will details info.
+	
+	e. terraform destory : terminates resources managed by your Terraform project. This command is the inverse of terraform apply in that it terminates all the resources specified in your Terraform state. It does not destroy resources running elsewhere that are not managed by the current Terraform project.
+	
+	while excution  time .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐥𝐨𝐜𝐤.𝐢𝐧𝐟𝐨 wile carete and once we give " yes" 
+	and terraform destroy command complete its disapper and create another file 𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐛𝐚𝐜𝐤𝐮𝐩 will details info.
+34. How terraform workspace will useful ?
+
+	Workspaces in Terraform are simply 𝐢𝐧𝐝𝐞𝐩𝐞𝐧𝐝𝐞𝐧𝐭𝐥𝐲 𝐦𝐚𝐧𝐚𝐠𝐞𝐝 𝐬𝐭𝐚𝐭𝐞 𝐟𝐢𝐥𝐞𝐬. A workspace contains everything that Terraform needs to manage a given collection of infrastructure, and separate Workspaces function like completely separate working directories. We can 𝐦𝐚𝐧𝐚𝐠𝐞 𝐦𝐮𝐥𝐭𝐢𝐩𝐥𝐞 𝐞𝐧𝐯𝐢𝐫𝐨𝐧𝐦𝐞𝐧𝐭𝐬 𝐰𝐢𝐭𝐡 𝐖𝐨𝐫𝐤𝐬𝐩𝐚𝐜𝐞𝐬.
+	
+	terraform workspace new test - to create test workspace
+	terraform workspace list
+		 default
+		* test
+	
+	Once you create workspace automacatlly 𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐝 will create . under this folder terrform.tfstate file will create accroding to workspace
+35. Terraform fmt ?
+	if you are given wrong format means some extra line space and open and close backets . once you give terraform fmr it will change perticular file with correct format .
+	
+36. terraform refresh ?
+	The terraform refresh command reads the current settings from all managed remote objects and updates the Terraform state to match
+37. terraform show ?
+	The terraform show command is used to provide human-readable output from a state or plan file. This can be used to inspect a plan to ensure that the planned .
+38. Diff between terraform validate and terraform fmr ?
+
+	terraform validate : it will chcek will chcek the configuration of code .
+	terraform fmr : it will chcek just format of terraform code like { } , extra speces .
+	
+39. Terraforom remote storage and state lock ( backend stroage statefile)
+	
+	we will use terraform remote stroage as S3 bucket and terraform state lock as dynamodb.
+	
+	why we want store in remotely bez if multiple team member try to use its not possible as local stroge but remote/cloud its always good.
+	
+	why statelocking : if two members are running terraform at same time you may be into race condition as multiple terraform concurrent update leading to conflict,data loss and statefile corruption for that we use state locking.
+	
+	
