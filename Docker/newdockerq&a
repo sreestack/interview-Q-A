@@ -1,0 +1,111 @@
+Docker 
+###############################33
+
+1. What is docker daemon
+	The Docker daemon ( dockerd ) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes
+2. Whats docker engine will do ?
+	its manages Docker objects such as images, containers, networks, and volumes
+3. What are the components of the Docker Engine?
+	Docker Cli, Docker Daemon, REST API
+4. What we want to -it (interactive terminal on docker run -it images ) for few images?
+	When you want give some input during execution of image we will give -it 
+5. port mapping how we use ( docker run -p 8002(des):8000(source) img)
+6.  volume mappling how we use ( docker run -v /opt/datadie(des):/var/lib/mysql(sou) mysql )
+7. docker logs containetid ( to chcek the logs)
+8. jenkins using docker ( docker run -p 8080:8080 -v /root/my-jennkins-dir:/var/jenkins_home -u root jenkins/jenkins)
+9. Docker run -e APP_Color=pink imgname (here e app_color is envionment varibale you chcek while inspect the img )
+10. diff between hypervisor and docker ?
+	hypervisor will usevally create virtaul mechine its kind of mediator to create virtual mechine . But docker will run on hypersion and create containers.
+11. Types of network 
+	bridge - default and single
+	overlay - multi servers
+	macvlan - mac level 
+12. Types of mounts in docker ?
+	blind mounts
+	volume mounts
+	tmpfs mounts
+13. What is docker namespace ?
+	Namespace is one of linux future and importent concept of containers.Namespace add layer of isolation of container.some of namespace support by docker was PID ,NET ,IPC ..etc
+14. What are docker stages ?
+	created 
+	running
+	exited
+	paused
+	restarted
+	dead
+15. Whata are expecetd in your docker compose file while moving to production ?
+
+	remove volume binding 
+	binding differnt port to host 
+	specify resrart policy 
+	add extra service like log aggregator
+16. how to chcek the docker image layer history with layer details ?
+	docker history imgname --no-trunk 
+17.Is it possible to create container writable layer without running docker conatiner?
+
+	yes ,, Using of docker create command
+18. how to find container size ?
+	docker ps -as
+19. How many ways you can restart the image ?
+	they are three ways ..
+	1. always --> 
+		docker run -it -d --restart=always imagname
+	2. on-failure
+	3. unless-stopped
+20. how to chcek live logs 
+	docker events or docker log
+21. how does docker worked behind the scences ? 
+			or
+	where namespace,,cgroup UnionFS is used in docker ?
+	
+	namespace: isolation between the containers . Ex:PID,User,filesystem ..etc
+	
+	Cgroup of control group : its responsible resoure management or resource limitaion on each container . ex: CPU,mem,network ..etc
+	
+	unionFS: this file service is used create docker image layer
+22. Is it possible pull/push image  run/stop docker container from inside of container ?
+	or
+	talk to host docker dameon from inside of a container ?
+	
+	yes . its possible . how docker commuinate using of docker.sock(/var/run/docker.sock) it will be there in host mechine.
+		
+	docker run -d -it -v /var/run/docker.sock:/var/run/docker.sock --name docker docker
+	
+	docker attach docker
+	
+23. I have db and app container running on host . How can these two containers talk to each other ?
+	using link flag incase of default bridge
+	or use user defind bridge
+24. what are most common inst used to write docker file ?
+	FROM --> to take base img
+	ARG  --> to pass varibales in build time 
+	LABEL --> to give description
+	ENV --> To set env varibales
+	WORKDIR --> to set working dir
+	RUN --> execution any command
+	COPY --> copy something from local
+	ADD --> same like copy and also extra futures
+	EXPOSE --> to expose port in image
+	CMD & Entrypoint --> to excute commands 
+25. Diff between ADD and copy
+		The Dockerfile specification provides two ways to copy files from the source system into an image: the COPY and ADD directives.
+	Here we will look at the difference between them and when it makes sense to use each one of them.
+
+	Sometimes you see COPY or ADD being used in a Dockerfile, but you should be using COPY 99% of the time. Here’s why.
+
+	COPY and ADD are both Dockerfile instructions that serve a similar purpose. They let you copy files from a specific location into a Docker image.
+	COPY takes in a source and destination. It only lets you copy in a local or directory from your host (the machine-building the Docker image) into the Docker image itself.
+26. Diff between cmd and entry point ?
+
+	CMD - The CMD describes the default container parameters or commands. The user can easily override the default command when you use this.
+	ENTRYPOINT - A container with an ENTRYPOINT is preferred when you want to define an executable. You can only override it if you use the --entrypoint flag.
+
+	
+	
+
+	
+		
+	
+			
+	
+	
