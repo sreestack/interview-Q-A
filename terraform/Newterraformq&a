@@ -3,7 +3,8 @@
 2. What are services that you have worked with and wrote terraform files?
 	we have worked all main service include ec2,vpc,s3,sns,sqs,lambda,loadbalnce,dynamobd .. more over 30+ service .
 3. Tell me a scenario where you come across provisioners?
-	few days back request cam like they need harchicorp valut enable virtual mechines ,by that time provisioners come to pic , we have differnt type of provisioners maily file,remote-exec,local-exec  ..etc. use of provisioners we carete custom image .
+	few days back request cam like they need harchicorp valut enable virtual mechines ,by that time provisioners come to pic ,
+	we have differnt type of provisioners maily file,remote-exec,local-exec  ..etc. use of provisioners we carete custom image .
 4. What are plugins and providers in terraform?
 	Its depend on provider what we select then respective plugins will install . So plugins are support liberies of provideds .
 5. How do you deploy the terraform code manually or with some automation? Have configured locks on the backend statefile?
@@ -50,7 +51,8 @@
 	e.restict access every one terraform apply 
 22 . tearraform version what you are using ?
 	1.29 and 1.32
-23. If Two devlopers work on single and one person used terrform apply and went for vaction and second person not bez of locking . So the second member take id of dynamo-db area and take id use force-unlock . 
+23. If Two devlopers work on single and one person used terrform apply and went for vaction and second person not bez of locking . 
+So the second member take id of dynamo-db area and take id use force-unlock . 
 	terraform Force-unlock id 
 24. How we can list of resourec created using of terraform 
 	terraform state list 
@@ -97,24 +99,33 @@
 	e. Container credentials
 	f. Instance profile credentials and region	
 33. What is flow of terraform implementaion ?
-	a. terraform init --> while apply the terraform init its download required provides what we highlated in providers blaock under .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦 folders these are will create and also .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐥𝐨𝐜𝐤.𝐡𝐜𝐥 file will create in the contain of providers and terraform communication info certificate( aws)
+	a. terraform init --> while apply the terraform init its download required provides what we highlated in providers blaock 
+				under .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦 folders these are will create and also .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐥𝐨𝐜𝐤.𝐡𝐜𝐥 file will create in the contain of providers and 
+				terraform communication info certificate( aws)
 	
-	b. terraform validate --> The terraform validate command validates the configuration files in a directory, referring only to the configuration and not accessing any remote services such as remote state, provider APIs, etc.
+	b. terraform validate --> The terraform validate command validates the configuration files in a directory, referring only to the configuration 
+				and not accessing any remote services such as remote state, provider APIs, etc.
 	
-	c. terraform plan : Once we plan api integrate we carete draft version what we are creating using of this config.Lets you to preview the actions Terraform would take to modify your infrastructure, or save a speculative plan which you can apply later. The function of terraform plan is speculative . while excution  time .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐥𝐨𝐜𝐤.𝐢𝐧𝐟𝐨 we create and diapper after terraform plan command excuted .
+	c. terraform plan : Once we plan api integrate we create draft version what we are creating using of this config.Lets you to preview the actions Terraform
+			    would take to modify your infrastructure, or save a speculative plan which you can apply later. The function of terraform plan is 
+			    speculative . while excution  time .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐥𝐨𝐜𝐤.𝐢𝐧𝐟𝐨 we create and diapper after terraform plan command excuted .
 	
-	d. terraform apply : Creates or updates infrastructure depending on the configuration files. By default, a plan will be generated first and will need to be approved before it is applied. terraform apply -auto-approve — Apply changes without having to interactively type 'yes' to the plan.
+	d. terraform apply : Creates or updates infrastructure depending on the configuration files. By default, a plan will be generated first and will need to be
+			    approved before it is applied. terraform apply -auto-approve — Apply changes without having to interactively type 'yes' to the plan.
 		
 	while excution  time .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐥𝐨𝐜𝐤.𝐢𝐧𝐟𝐨 wile carete and once we give " yes" 
 	and terraform apply command complete its disapper and create another file 𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞 will details info.
 	
-	e. terraform destory : terminates resources managed by your Terraform project. This command is the inverse of terraform apply in that it terminates all the resources specified in your Terraform state. It does not destroy resources running elsewhere that are not managed by the current Terraform project.
+	e. terraform destory : terminates resources managed by your Terraform project. This command is the inverse of terraform apply in that it terminates all the 
+				resources specified in your Terraform state. It does not destroy resources running elsewhere that are not managed by the current 
+				Terraform project.
 	
 	while excution  time .𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐥𝐨𝐜𝐤.𝐢𝐧𝐟𝐨 wile carete and once we give " yes" 
 	and terraform destroy command complete its disapper and create another file 𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐛𝐚𝐜𝐤𝐮𝐩 will details info.
 34. How terraform workspace will useful ?
 
-	Workspaces in Terraform are simply 𝐢𝐧𝐝𝐞𝐩𝐞𝐧𝐝𝐞𝐧𝐭𝐥𝐲 𝐦𝐚𝐧𝐚𝐠𝐞𝐝 𝐬𝐭𝐚𝐭𝐞 𝐟𝐢𝐥𝐞𝐬. A workspace contains everything that Terraform needs to manage a given collection of infrastructure, and separate Workspaces function like completely separate working directories. We can 𝐦𝐚𝐧𝐚𝐠𝐞 𝐦𝐮𝐥𝐭𝐢𝐩𝐥𝐞 𝐞𝐧𝐯𝐢𝐫𝐨𝐧𝐦𝐞𝐧𝐭𝐬 𝐰𝐢𝐭𝐡 𝐖𝐨𝐫𝐤𝐬𝐩𝐚𝐜𝐞𝐬.
+	Workspaces in Terraform are simply 𝐢𝐧𝐝𝐞𝐩𝐞𝐧𝐝𝐞𝐧𝐭𝐥𝐲 𝐦𝐚𝐧𝐚𝐠𝐞𝐝 𝐬𝐭𝐚𝐭𝐞 𝐟𝐢𝐥𝐞𝐬. A workspace contains everything that Terraform needs to manage a given collection of 
+	infrastructure, and separate Workspaces function like completely separate working directories. We can 𝐦𝐚𝐧𝐚𝐠𝐞 𝐦𝐮𝐥𝐭𝐢𝐩𝐥𝐞 𝐞𝐧𝐯𝐢𝐫𝐨𝐧𝐦𝐞𝐧𝐭𝐬 𝐰𝐢𝐭𝐡 𝐖𝐨𝐫𝐤𝐬𝐩𝐚𝐜𝐞𝐬.
 	
 	terraform workspace new test - to create test workspace
 	terraform workspace list
@@ -123,7 +134,8 @@
 	
 	Once you create workspace automacatlly 𝐭𝐞𝐫𝐫𝐚𝐟𝐨𝐫𝐦.𝐭𝐟𝐬𝐭𝐚𝐭𝐞.𝐝 will create . under this folder terrform.tfstate file will create accroding to workspace
 35. Terraform fmt ?
-	if you are given wrong format means some extra line space and open and close backets . once you give terraform fmr it will change perticular file with correct format .
+	if you are given wrong format means some extra line space and open and close backets . once you give terraform fmr it will change perticular file with 
+	correct format .
 	
 36. terraform refresh ?
 	The terraform refresh command reads the current settings from all managed remote objects and updates the Terraform state to match
@@ -143,3 +155,4 @@
 	why statelocking : if two members are running terraform at same time you may be into race condition as multiple terraform concurrent update leading to conflict,data loss and statefile corruption for that we use state locking.
 	
 	
+
