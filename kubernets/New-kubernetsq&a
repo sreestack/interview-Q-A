@@ -9,27 +9,41 @@
 5. what means by pod ?
 	Pods are the smallest deployable units of computing that you can create and manage in Kubernetes. Pods host containers 
 6. What is Kubernetes Architecture?
-	the Kubernetes control plane and the nodes in the cluster. The control plane machine components include the Kubernetes API server, Kubernetes scheduler, Kubernetes controller manager, and etcd. Kubernetes node components include a container runtime engine or docker, a Kubelet service, and a Kubernetes proxy service.
+	the Kubernetes control plane and the nodes in the cluster. The control plane machine components include the Kubernetes API server, Kubernetes scheduler, 
+	Kubernetes controller manager, and etcd. Kubernetes node components include a container runtime engine or docker, a Kubelet service, and 
+	a Kubernetes proxy service.
 	
 	etcd:
 		It stores the configuration information which can be used by each of the nodes in the cluster. 
 	API Server: 
-		API server implements an interface, which means different tools and libraries can readily communicate with it. Kubeconfig is a package along with the server side tools that can be used for communication.
+		API server implements an interface, which means different tools and libraries can readily communicate with it. 
+		Kubeconfig is a package along with the server side tools that can be used for communication.
 	Controller Manager:
-		It works toward getting the shared state of cluster and then make changes to bring the current status of the server to the desired state. The key controllers are replication controller, endpoint controller, namespace controller, and service account controller.
+		It works toward getting the shared state of cluster and then make changes to bring the current status of the server to the desired state. 
+		The key controllers are replication controller, endpoint controller, namespace controller, and service account controller.
 	Scheduler:
-		It is responsible for tracking utilization of working load on cluster nodes and then placing the workload on which resources are available and accept the workload. In other words, this is the mechanism responsible for allocating pods to available nodes. The scheduler is responsible for workload utilization and allocating pod to new node.
+		It is responsible for tracking utilization of working load on cluster nodes and then placing the workload on which resources are available 
+		and accept the workload. In other words, this is the mechanism responsible for allocating pods to available nodes. 
+		The scheduler is responsible for workload utilization and allocating pod to new node.
 	Kubelet Service:
 		communication between master and child server happen with this.
-		It interacts with etcd store to read configuration details and wright values. This communicates with the master component to receive commands and work. The kubelet process then assumes responsibility for maintaining the state of work and the node server. It manages network rules, port forwarding, etc.
+		It interacts with etcd store to read configuration details and wright values. 
+		This communicates with the master component to receive commands and work. 
+		The kubelet process then assumes responsibility for maintaining the state of work and the node server. 
+		It manages network rules, port forwarding, etc.
 	Kubernetes Proxy Service
-		This is a proxy service which runs on each node and helps in making services available to the external host. It helps in forwarding the request to correct containers and is capable of performing primitive load balancing. It makes sure that the networking environment is predictable and accessible and at the same time it is isolated as well. It manages pods on node, volumes, secrets, creating new containers’ health checkup, etc
-	Container run time(child server used for pod to pod communication in project we use vnet as network communication) & cloud container manager(controlplane ) are two  more .
+		This is a proxy service which runs on each node and helps in making services available to the external host. 
+		It helps in forwarding the request to correct containers and is capable of performing primitive load balancing. 
+		It makes sure that the networking environment is predictable and accessible and at the same time it is isolated as well. 
+		It manages pods on node, volumes, secrets, creating new containers’ health checkup, etc
+	Container run time(child server used for pod to pod communication in project we use vnet as network communication) & 
+	cloud container manager(controlplane ) are two  more .
 7. Designing High Availability for Master nodes !
 	we have 3 master and 1 servers act as leader. We use Quorum concept to select the leader .its always odd numbers
 8. What type of HA (high availability) architecture havae you managed in terms of 	high availability or otherwise.
 
-	interanlly testing we use kubeadm process like one master and 6 worker node concept . Production envionment use EKS. But envionment i cant disclose . they are planty of servers/application  running
+	interanlly testing we use kubeadm process like one master and 6 worker node concept . 
+	Production envionment use EKS. But envionment i cant disclose . they are planty of servers/application  running
 9. What is the Kubernetes Version you are running
 	1.24
 10. How do you get configuration information for different clusters for different envionments ?
@@ -39,7 +53,9 @@
 11. When you issue a kubectl command, what happens behind the scenes. Can you please run us through
 	command : kubectl run podname
 	a. its convert to API call then API-server will chcek the syntax correct or not
-	b. then convert REST-API call for CRUD (craete/read/update/delete) operations  it will chcek ipadrees and port(6443) then authutication/autazoation  request . Those auth details store kubeconfig file. After that Those information will store in etcd. then schdeule will chcek and schdeule to workernode.controler will chcek is ther mul no or single . this will work with kubelet and container runtime and create the pod
+	b. then convert REST-API call for CRUD (craete/read/update/delete) operations  it will chcek ipadrees and port(6443) then authutication/autazoation  request .
+	Those auth details store kubeconfig file. After that Those information will store in etcd. then schdeule will chcek and schdeule to workernode.
+	controler will chcek is ther mul no or single . this will work with kubelet and container runtime and create the pod
 12. What are the different types of Objects in k8s. How to get the list of objects installed in the cluster?
 	pod, Namespecs, Replicaset, service, configmaps, volumes.deploymenst,DaemonSets,staticpods,StatefulSets,secrets,clusterrole,cluterrolebinding
 command : kubectl api-resources
@@ -54,9 +70,11 @@ command : kubectl api-resources
 	
 15. Discuss aboout Stateful set and deployments in k8s
 
-	The key difference between stateful and stateless applications is that stateless applications don’t “store” data. On the other hand, stateful applications require backing storage. For example, applications like the Cassandra, MongoDB, and MySQL databases require some type of persistent storage to survive service restarts.
+	The key difference between stateful and stateless applications is that stateless applications don’t “store” data. On the other hand, stateful applications 
+	require backing storage. For example, applications like the Cassandra, MongoDB, and MySQL databases require some type of persistent storage to survive service 
+	restarts.
 16 . Share object used for scaling up the pods, say, in case of load increase?
-	while using HPA(horizontal pod autoscaler )we can set case like if load touched 75% new instance will launch . Like that you can increase instance depend on load
+	while using HPA(horizontal pod autoscaler)we can set case like if load touched 75% new instance will launch.Like that you can increase instance depend on load
 17.Discuss about Restart Policies as part of yaml files.
 		
 	kubenets reseat policy of pod/containers are three type 
@@ -72,26 +90,33 @@ command : kubectl api-resources
 	Running:	The Pod has been bound to a node, and all of the containers have been created. At least one container is still running, or is in the process of starting or restarting.
 	Succeeded:	All containers in the Pod have terminated in success, and will not be restarted.
 	Failed:	All containers in the Pod have terminated, and at least one container has terminated in failure. That is, the container either exited with non-zero status or was terminated by the system.
-	Unknown:	For some reason the state of the Pod could not be obtained. This phase typically occurs due to an error in communicating with the node where the Pod should be running.
+	Unknown:	For some reason the state of the Pod could not be obtained. This phase typically occurs due to an error in communicating with the node 
+	where the Pod should be running.
 19.	How to resolve specific issues related to Pod status like OOM(outofmemory). Debugging approach based on the pod status?
-	example : while schdeule pod you menstion min usage like 1 cpu and 1gb memorey and max 2 cpu and 5 gb. Suppose pod requested more than that then OOM error will occurs
+	example : while schdeule pod you menstion min usage like 1 cpu and 1gb memorey and max 2 cpu and 5 gb. Suppose pod requested more than that then OOM error 
+	will occurs
 20.What is the concept of Image pullback / something similar ?
-	suppose if you want pull the image like docker hub we dont need any specific permission but pushing we need to login and push . this mage pullback will come while kubelet unable to pull the image for private repositiry may credential	issues. 
+	suppose if you want pull the image like docker hub we dont need any specific permission but pushing we need to login and push . 
+	this mage pullback will come while kubelet unable to pull the image for private repositiry may credential issues. 
 	how to reslove:we have concept called secret to slove credential 
 21. Can a Pod have multiple containers?
 	yes we can . but best pratice maintain single container in one pod.
-22. Scenario: Very huge file, present in s3. User wish to download the file. Application Image can not handle it directly. It has to be downloaded and made available to the Pod. like before run pods that pod need some info  ....Concept of Init containers here
+22. Scenario: Very huge file, present in s3. User wish to download the file. Application Image can not handle it directly. 
+    	     It has to be downloaded and made available to the Pod. like before run pods that pod need some info  ....Concept of Init containers here
 
-	initcontainer: we use use multi init container and write our requirements .if this case we can use emptyDIR for both pod and init volume and use it . So once its downloaded pod will use it.if it failed its start from starting init container excution.
+	initcontainer: we use use multi init container and write our requirements .if this case we can use emptyDIR for both pod and init volume and use it . 
+	So once its downloaded pod will use it.if it failed its start from starting init container excution.
 23. Scenario: Central logging system. Want to use that system. Discuss the pattern used. .....Concept of sidecar Pattern
 	sidecar container: it will excution after regular pod completed and collect the logs and store to central log repositiry.
 	
 24. Discussion on best practice of having smallest possible Image size...
-	20.1. Discussion on Ephemeral containes. Concept here
+	 Discussion on Ephemeral containes. Concept here
 	
-	To trobleshoot the issue and maintain the container size minimum that time we can use. Pod can create and another pod and connect use of same network then trobleshoot.
+	To trobleshoot the issue and maintain the container size minimum that time we can use. Pod can create and another pod and connect use of same network then 
+	trobleshoot.
 	
-	Ephemeral containers allow you to create a container image that includes all the debugging tools you might need. Once there is a need for debugging, you would deploy the ephemeral container into the running pod of your choice.
+	Ephemeral containers allow you to create a container image that includes all the debugging tools you might need. 
+	Once there is a need for debugging, you would deploy the ephemeral container into the running pod of your choice.
 	
 	https://loft.sh/blog/using-kubernetes-ephemeral-containers-for-troubleshooting/
 25. Scenario: Your application need to talk to some legacy application. Need to reduce the Image size.. Pattern to be used here to be discussed such as Ambassador pattern
@@ -99,7 +124,8 @@ command : kubectl api-resources
 
 	If you want connect legency application we need conncetivity/proxy so it should be enebale for that time we can use Ambassador pattern/proxy pattern.
 	
-	An Ambassador container is a sidecar container that is in charge of proxying connections from the application container to other services. However, while the Adapter container acts as a reverse proxy, the Ambassador container acts as a client proxy.
+	An Ambassador container is a sidecar container that is in charge of proxying connections from the application container to other services. However, 
+	while the Adapter container acts as a reverse proxy, the Ambassador container acts as a client proxy.
 	
 	What is advantage of istion is its automatically enable proxy once its enable .
 	its useful to trace how many request happen pod1 to pod2 , Howmany success and how many failed .
@@ -109,9 +135,11 @@ command : kubectl api-resources
 	we will ambassador container , application container connect ambassador and its connect to lagency and dataflow come to application .
 	
 	istion container :
-	Istiod acts as the control plane, distributing the configuration to all sidecar proxies and gateways. It enables intelligent application-aware load balancing from the application layer to other mesh enabled services in the cluster and bypasses the rudimentary kube-proxy load balancing. 
+	Istiod acts as the control plane, distributing the configuration to all sidecar proxies and gateways. It enables intelligent application-aware load balancing
+	from the application layer to other mesh enabled services in the cluster and bypasses the rudimentary kube-proxy load balancing. 
 	
-26. Scenario: App B to communicate with App A using some endppoint. API A would give Json output, App B needs xml format. How to resolve this stalemate. Concept of Adapter / exporters container discussed !
+26. Scenario: App B to communicate with App A using some endppoint. API A would give Json output, App B needs xml format. How to resolve this stalemate. 
+Concept of Adapter / exporters container discussed !
 
 	in adapter container useful to take something input and will give different format output like excel,pdf,..etc.
 27. What is the use of Replicaset / deployment ?
@@ -137,9 +165,13 @@ command : kubectl api-resources
 	blue/green: 
 				release a new version alongside the old version then switch traffic.
 	Canary deployment:
-				uses a progressive delivery approach, with one version of the application serving most users, and another, newer version serving a small pool of test users. The test deployment is rolled out to more users if it is successful.
+				uses a progressive delivery approach, with one version of the application serving most users, and another, newer version serving 
+				a small pool of test users. The test deployment is rolled out to more users if it is successful.
 	a/b testing: 
-				release a new version to a subset of users in a precise way (HTTP headers, cookie, weight, etc.). A/B testing is really a technique for making business decisions based on statistics but we will briefly describe the process. This doesn’t come out of the box with Kubernetes, it implies extra work to setup a more advanced infrastructure (Istio, Linkerd, Traefik, custom nginx/haproxy, etc).
+				release a new version to a subset of users in a precise way (HTTP headers, cookie, weight, etc.). 
+				A/B testing is really a technique for making business decisions based on statistics but we will briefly describe the process. 
+				This doesn’t come out of the box with Kubernetes, i
+				t implies extra work to setup a more advanced infrastructure (Istio, Linkerd, Traefik, custom nginx/haproxy, etc).
 				
 		https://github.com/ContainerSolutions/k8s-deployment-strategies
 30. why we need labels and what is importent of labels ?
@@ -160,26 +192,36 @@ command : kubectl api-resources
 36. how to remove perticular label ?
 	kubectl label pod -l label-
 37. What Are Annotations in Kubernetes?
-	Annotations are used for “non-identifying information” i.e., metadata that Kubernetes does not care about. we cant filter using of annotation . its used to for external tools like prometheus
+	Annotations are used for “non-identifying information” i.e., metadata that Kubernetes does not care about. we cant filter using of annotation .
+	its used to for external tools like prometheus
 38. what is use of selectors ?
-	we can use selector to fill the objects . We have two type of selectore a. equality ( used by services) we can use = or != b ex: app=ngnix. set based selector( used by deployment,replicaset) we can use or and,other kind operator ex: env in (qa,uat)
+	we can use selector to fill the objects . We have two type of selectore a. equality ( used by services) we can use = or != b ex: app=ngnix. 
+	set based selector( used by deployment,replicaset) we can use or and,other kind operator ex: env in (qa,uat)
 	Select all pods which ag
 39. tell me current exp in kubernets
-		I ahve worked multiple projects , manily application running on on-prem , we have prepared require objects and deploy in kubernets using of helm and work on some poc like montoring setup like that .
+		I have worked multiple projects , manily application running on on-prem , we have prepared require objects and deploy in kubernets using of helm and
+		work on some poc like montoring setup like that .
 		
 39. What are monitoing which you are used in kubernetes platform ?
-	we are used elk and big panda, kubernets dash board . elk we need chcek pod logs when its up and what kind of actvites happing . Even pod teminate will get complete logs .
+	we are used elk and big panda, kubernets dash board . elk we need chcek pod logs when its up and what kind of actvites happing . 
+	Even pod teminate will get complete logs .
 40. Difference between deployment,replicaset and stateful set ?
-	ReplicaSet: Using ReplicaSets not only caters to the easy scaling and 			rescheduling of an application, but also allows you to perform rolling or multi-track updates to an application	
-	Deployment : you can use a Deployment to manage pods and ReplicaSets. 			Deployments are useful when you need to roll out changes to ReplicaSets. By using a Deployment to manage a ReplicaSet, you can easily rollback to an earlier Deployment revision
-	Statefulset: when you create pods they are always created in the same order and allocated identifiers that are applied to host names and the internal cluster DNS. Those identifiers ensure there are stable and predictable network identities for pods in the environment. If its destory and create it will create rename and deployment come differnt name.
+	ReplicaSet: Using ReplicaSets not only caters to the easy scaling and rescheduling of an application, 
+			but also allows you to perform rolling or multi-track updates to an application	
+	Deployment : you can use a Deployment to manage pods and ReplicaSets.Deployments are useful when you need to roll out changes to ReplicaSets. 
+			By using a Deployment to manage a ReplicaSet, you can easily rollback to an earlier Deployment revision
+	Statefulset: when you create pods they are always created in the same order and allocated identifiers that are applied to host names and 
+			the internal cluster DNS. Those identifiers ensure there are stable and predictable network identities for pods in the environment. 
+			If its destory and create it will create rename and deployment come differnt name.
 41. If pod is delete in stateful set IP addreess still retained ?
 	No, it will reacrete StatefulSet Pods have a unique identity that is comprised of an ordinal, a stable network identity, and stable storage.
 	
 40.	Pod is not coming up in perticualr node ?
-	many reason a) taint and tolarence , b) memorey issue ( you system ahve 2 gb but you requested 4gb its pending state ) c) if you reuse the host port d) image not avaliable 
+	many reason a) taint and tolarence , b) memorey issue ( you system ahve 2 gb but you requested 4gb its pending state ) 
+	c) if you reuse the host port 	d) image not avaliable 
 41. How can i do autoscaling of deployment or pods in kubernetes cluster?
-	a) hpa ( horizontal pod autoscaling) --> if you are using kubeadm then you need setup metic server, when ever use hpa its will communicate metic server and metic commuinacte kubeadm server and get the data.if it reaches 50 % cpu then increase pod count 
+	a) hpa ( horizontal pod autoscaling) --> if you are using kubeadm then you need setup metic server, when ever use hpa its will communicate metic server and 
+		metic commuinacte kubeadm server and get the data.if it reaches 50 % cpu then increase pod count 
 	b) vpa ( vertical pod autoscaling): if pod using 500 mb if application goes where increase the memory when application increase
 42. If container not coming up how can you troubleshhot ?
 	a. kubectl describe pod name chcek first logs 
@@ -194,7 +236,9 @@ command : kubectl api-resources
 45. diference b/w helm and operate framwork ?
 
 46. difference between local and remote storage in kubernetes cluster ?
-	stateful application use remote storage and different stroage like aws ebs, google clod .If you are maintain remote storage like google cloud if pod goes down also you can maintain the data.If you not main like pv & the pod goes fdown then lost the data.local lioks hostpath and empty dir like that.
+	stateful application use remote storage and different stroage like aws ebs, google clod .
+	If you are maintain remote storage like google cloud if pod goes down also you can maintain the data.
+	If you not main like pv & the pod goes fdown then lost the data.local lioks hostpath and empty dir like that.
 47. difference between stand alone kubernets and gks /eks ?
 	gks/eks : you no need think on maintaince of kubeadmin server, infra level they will take ,
 	standalone. you must maintain all servers up to patch and master servers also.
@@ -218,20 +262,24 @@ command : kubectl api-resources
 54. What is difference between deployment and stateful state?
 	staefulset : 
 		maintain dns same if reset of pod .
-		headless service : Sometimes you don't need load-balancing and a single Service IP. In this case, you can create what are termed "headless" Services, by explicitly specifying "None" for the cluster IP.
+		headless service : Sometimes you don't need load-balancing and a single Service IP. In this case, you can create what are termed "headless" Services, 
+		by explicitly specifying "None" for the cluster IP.
 		
 		you can achice headless ervice using deployment also but you need to write any codee .
 55. What are all objects you used in K8s?
 
 56. What is use of service accounts?
-	henever you access your Kubernetes cluster with kubectl, you are authenticated by Kubernetes with your user account. User accounts are meant to be used by humans. But when a pod running in the cluster wants to access the Kubernetes API server, it needs to use a service account instead.
+	henever you access your Kubernetes cluster with kubectl, you are authenticated by Kubernetes with your user account. 
+	User accounts are meant to be used by humans. But when a pod running in the cluster wants to access the Kubernetes API server, 
+	it needs to use a service account instead.
 	ex: when you have a CI/CD pipeline agent deploying your applications to the same cluster.
 57. Once you deployed application using deployment into cluster, how do you access application outside world?
 	manyways are there like 
 	a. create service like node port
 	b. ingress process
 58. What is use of clusterIP service?
-	When you create a Service of type ClusterIP , Kubernetes creates a stable IP address that is accessible from nodes in the cluster. Clients in the cluster call the Service by using the cluster IP address and the TCP port specified in the port field of the Service manifest.
+	When you create a Service of type ClusterIP , Kubernetes creates a stable IP address that is accessible from nodes in the cluster.
+	Clients in the cluster call the Service by using the cluster IP address and the TCP port specified in the port field of the Service manifest.
 	
 		 a type of service which is only accessible within a Kubernetes cluster, or the internal ("virtual") IP of components within a Kubernetes cluster.
 59. How did you copy a config file inside pod?
@@ -239,17 +287,24 @@ command : kubectl api-resources
 	ex: kubectl cp <file-spec-src> <file-spec-dest>
 	
 60. What is difference between secrets and configmap?
-	Both, ConfigMaps and Secrets store data as a key value pair. The major difference is, Secrets store data in base64 format meanwhile ConfigMaps store data in a plain text.
+	Both, ConfigMaps and Secrets store data as a key value pair. The major difference is, Secrets store data in base64 format meanwhile 
+	ConfigMaps store data in a plain text.
 
-	If you have some critical data like, keys, passwords, service accounts credentials, db connection string, etc then you should always go for Secrets rather than Configs.
+	If you have some critical data like, keys, passwords, service accounts credentials, db connection string, etc then you should always go for Secrets 
+	rather than Configs.
 
-	And if you want to do some application configuration using environment variables which you don't want to keep secret/hidden like, app theme, base platform url, etc then you can go for ConfigMaps
+	And if you want to do some application configuration using environment variables which you don't want to keep secret/hidden like, app theme, 
+	base platform url, etc then you can go for ConfigMaps
 61. Explain static pods in K8s?
-	Static Pods are managed directly by the kubelet daemon on a specific node, without the API server observing them. Unlike Pods that are managed by the control plane (for example, a Deployment); instead, the kubelet watches each static Pod (and restarts it if it fails)
+	Static Pods are managed directly by the kubelet daemon on a specific node, without the API server observing them. 
+	Unlike Pods that are managed by the control plane (for example, a Deployment); instead, the kubelet watches each static Pod (and restarts it if it fails)
 	
-	You almost never have to deal with static pods. Static pods are usually used by software bootstrapping kubernetes itself. For example, kubeadm uses static pods to bringup kubernetes control plane components like api-server, controller-manager as static pods. kubelet can watch a directory on the host file system
+	You almost never have to deal with static pods. Static pods are usually used by software bootstrapping kubernetes itself. 
+	For example, kubeadm uses static pods to bringup kubernetes control plane components like api-server, controller-manager as static pods. 
+	kubelet can watch a directory on the host file system
 62. Why deamon sets required for K8s?
-	DaemonSets can improve the performance of a Kubernetes cluster by distributing maintenance tasks and support services via deploying Pods across all nodes. They are well suited for long-running services like monitoring or log collection. Following are some example use cases of DaemonSets:
+	DaemonSets can improve the performance of a Kubernetes cluster by distributing maintenance tasks and support services via deploying Pods across all nodes.
+	They are well suited for long-running services like monitoring or log collection. Following are some example use cases of DaemonSets:
 
 		To run a daemon for cluster storage on each node, such as glusterd and ceph.
 		To run a daemon for logs collection on each node, such as Fluentd and logstash.
@@ -262,7 +317,9 @@ command : kubectl api-resources
 	yes(use of taint and toleance) . its possble . but best pratice we cant encourge to deploy.
 65. Is it possible to decide to deploy pod in particular node?
 	a. Node selector :
-			nodeSelector is the simplest recommended form of node selection constraint. You can add the nodeSelector field to your Pod specification and specify the node labels you want the target node to have. Kubernetes only schedules the Pod onto nodes that have each of the labels you specify
+			nodeSelector is the simplest recommended form of node selection constraint. You can add the nodeSelector field to your Pod specification 
+			and specify the node labels you want the target node to have. Kubernetes only schedules the Pod onto nodes that have each of the labels 
+			you specify
 	b. Node affinity: 
 			Node affinity is conceptually similar to nodeSelector, allowing you to constrain which nodes your Pod can be scheduled on based on node labels. There are two types of node affinity:
 
@@ -272,9 +329,11 @@ command : kubectl api-resources
 	Note : If you specify both nodeSelector and nodeAffinity, both must be satisfied for the Pod to be scheduled onto a node.
 	
 	node selector vs nodeAffinity:
-		nodeSelector only selects nodes with all the specified labels. Affinity/anti-affinity gives you more control over the selection logic. You can indicate that a rule is soft or preferred, so that the scheduler still schedules the Pod even if it can't find a matching node.
+		nodeSelector only selects nodes with all the specified labels. Affinity/anti-affinity gives you more control over the selection logic. 
+		You can indicate that a rule is soft or preferred, so that the scheduler still schedules the Pod even if it can't find a matching node.
 	Pod affinity and anti-affinity
-			pod affinity: an application that consists of multiple services, some of which may require that they be co-located on the same node for performance reasons.
+			pod affinity: an application that consists of multiple services, some of which may require that they be co-located on the same node for 
+			performance reasons.
 			anti-affinity: replicas of critical services shouldn't be placed onto the same node to avoid loss in the event of node failure.
 	
 	https://www.devopsschool.com/blog/understanding-node-selector-and-node-affinity-in-kubernetes/
@@ -308,16 +367,21 @@ command : kubectl api-resources
 	
 	Two things you need to backup :
 
-	Kubernetes stores its state in etcd , so to restore the master, etcd and relevant certificates must be backed up. This post wont talk about about backing up etcd as its quite well documented here
-	Application data i.e persistent volumes, because lets face it you will be having stateful applications running on your cluster. We cover this point in this post.
+	Kubernetes stores its state in etcd , so to restore the master, etcd and relevant certificates must be backed up. 
+	This post wont talk about about backing up etcd as its quite well documented here
+	Application data i.e persistent volumes, because lets face it you will be having stateful applications running on your cluster. 
+	We cover this point in this post.
 71. What is RBAC (Role-based access control)?
 	Kubernetes RBAC is a key security control to ensure that cluster users and workloads have only the access to resources required to execute their roles.
 	
 72. What is use of PV and PVC?
-	pv: Kubernetes makes physical storage devices like your SSDs, NVMe disks, NAS, NFS servers available to your cluster in the form of objects called -- Persistent Volumes
-	pvc: Each of these Persistent Volumes is consumed by a Kubernetes Pod (or Pods) by issuing a PersistentVolumeClaim object -- a PVC. A PVC object lets pods use storage from Persistent Volumes.
+	pv: Kubernetes makes physical storage devices like your SSDs, NVMe disks, NAS, NFS servers available to your cluster in the 
+	form of objects called -- Persistent Volumes
+	pvc: Each of these Persistent Volumes is consumed by a Kubernetes Pod (or Pods) by issuing a PersistentVolumeClaim object -- a PVC.
+	A PVC object lets pods use storage from Persistent Volumes.
 73. Do you know ingress in K8s?
-	an Ingress is an object that allows access to your Kubernetes services from outside the Kubernetes cluster. You configure access by creating a collection of rules that define which inbound connections reach which services
+	an Ingress is an object that allows access to your Kubernetes services from outside the Kubernetes cluster. 
+	You configure access by creating a collection of rules that define which inbound connections reach which services
 74. How did you setup monitoring tools in cluster?
 
 	If youb want logs : set ELK
@@ -327,7 +391,8 @@ command : kubectl api-resources
 	b. when configuare copy to pod. ( we are copying kubernetes user and inside was root. so user mismatch then copy to /tmp then copy to destination useing copy)
 	c. helm chat spl char. using of base64 code exchange 
 	d. service issue
-76. Application is 3 tier application Front end, backend and DB. while accessing DNS it says traffic is unable to access application. What do you think what can be issue?
+76. Application is 3 tier application Front end, backend and DB. while accessing DNS it says traffic is unable to access application. 
+What do you think what can be issue?
 	selctor/labels mismatch
 77. I given 10 mins time, I need to deploy 3 tier application, which method you follow?
 	helm is best way deploy 
@@ -359,7 +424,7 @@ command : kubectl api-resources
 	kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
 85. If schdeuler not avaiable how can schdeule pods ?
 	using nodeName property will be schedule other way using of binding 
-86. Filter using labels 
+86. Filter using labels
 		kubectl get pods --selector labelname
 87. Static pod location .
 	create a yaml file and place --> /etc/kubernetes/manifests
@@ -387,6 +452,17 @@ command : kubectl api-resources
 	kubectl repalce --force -f filkename
 95. Authization types 
 	node ,attribute based authorization, Role bases authorization, Webhook, Always allow(default), Always denied 
+96. stateful applications ?
+
+	https://loft.sh/blog/kubernetes-statefulset-examples-and-best-practices/
+97. Headless Services
+	Its a service without loadbalancer in case of multiple pods & gives unique Identifier to pod as identification.
+
+	Example -: In case of My-sql DB . We know we point one app to another through service ,suppose we have a My-sql db 3 pods cluster & webapp want to connect to 
+		  the db but a service will act as loadbalancer ,can read write from any db,but in production setup only master db should be used by application to
+		  write data ,other pods/slave dbs can be used for reading the data also when a pod dies a new pod is created as replica-set than dns /Ip will change 
+		  so we cannot force application to write only to master .In this scenario headless service will be used ,which results in a unique dns creation 
+		  so one pod can be used to write data.
 
 #############################################
 
