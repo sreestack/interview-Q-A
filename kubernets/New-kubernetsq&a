@@ -213,6 +213,10 @@ Concept of Adapter / exporters container discussed !
 	Statefulset: when you create pods they are always created in the same order and allocated identifiers that are applied to host names and 
 			the internal cluster DNS. Those identifiers ensure there are stable and predictable network identities for pods in the environment. 
 			If its destory and create it will create rename and deployment come differnt name.
+			ex: 	A Redis pod that has access to a volume, but you want it to maintain access to the same volume even if it is redeployed or restarted
+				A Cassandra cluster and have each node maintain access to its data
+				A webapp that needs to communicate with its replicas using known predefined network identifiers
+			StatefulSets are available in Kubernetes 1.9 and later.
 41. If pod is delete in stateful set IP addreess still retained ?
 	No, it will reacrete StatefulSet Pods have a unique identity that is comprised of an ordinal, a stable network identity, and stable storage.
 	
