@@ -25,7 +25,8 @@ Docker
 	volume mounts
 	tmpfs mounts
 13. What is docker namespace ?
-	Namespace is one of linux future and importent concept of containers.Namespace add layer of isolation of container.some of namespace support by docker was PID ,NET ,IPC ..etc
+	Namespace is one of linux future and importent concept of containers.Namespace add layer of isolation of container.
+	some of namespace support by docker was PID ,NET ,IPC ..etc
 14. What are docker stages ?
 	created 
 	running
@@ -94,7 +95,10 @@ Docker
 	Sometimes you see COPY or ADD being used in a Dockerfile, but you should be using COPY 99% of the time. Here’s why.
 
 	COPY and ADD are both Dockerfile instructions that serve a similar purpose. They let you copy files from a specific location into a Docker image.
-	COPY takes in a source and destination. It only lets you copy in a local or directory from your host (the machine-building the Docker image) into the Docker image itself.
+	COPY takes in a source and destination. It only lets you copy in a local or directory from your host (the machine-building the Docker image) into the 
+	Docker image itself.
+	 the ADD directive will automatically expand tar files into the image file system. While this can reduce the number of Dockerfile steps required to build an image
+	     ADD directive can accept a remote URL for its source argument
 26. Diff between cmd and entry point ?
 
 	CMD - The CMD describes the default container parameters or commands. The user can easily override the default command when you use this.
