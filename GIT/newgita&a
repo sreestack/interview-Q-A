@@ -2,14 +2,16 @@
 we many mainly two ways 
 		a.  git config --global credential.helper store
 		
-			once you run then push any content normaly then this will create one new file in $home/.git-credentials location and save credetial.One more thing $home/.gitconfig location will update [credential] helper = store
+			once you run then push any content normaly then this will create one new file in $home/.git-credentials location and save credetial.
+			One more thing $home/.gitconfig location will update [credential] helper = store
 			So automatcally will take credential ,
 
 			suppose you want erase the credential
 			
 			git config --global credential.helper erase	
 
-		b. just save .rsa_pub info in github/ssh and gpgkeys area and update global url from https to git meand git config --global url clone-url . This one also does not need any auth
+		b. just save .rsa_pub info in github/ssh and gpgkeys area and update global url from https to git meand git config --global url clone-url . 
+		This one also does not need any auth
 		
 2. how to mimic with two branch or how to up to date of future brnach to master branch ?
 
@@ -18,10 +20,9 @@ we many mainly two ways
 			c. git reset --hard origin/master ( source branch)
 			d. git log 
 			e. git push origin master 
-3. git remote add upstream url :
+3. git remote add upstream url : git remote -v 
+				 git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
 4.git reset --hard upstream/master
-5.git remote add origin url
-6.git reset --hard upstream/master
 7.git fetch --all --prune ( fetch even delete one also)
 8.git pull upstream brachname
 9.git restore --staged <file>
@@ -34,6 +35,7 @@ we many mainly two ways
 	git log 
 	git rebase -i  id 
 	:x ( update message then :x)
+	git squash ( git merge --squash new-branch-temp )
 16. git reset --hard id ( its errase above commits)
 17. merge confilct --> if we try to edit same line two members first its dispaly the megrge issue then you have edit manuvally then merged . that how you have reslove the issue .
 18. How to merge and delete branch 
