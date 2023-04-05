@@ -74,6 +74,17 @@
 	we can tag and do  it
 18. How to call existing resources from AWS or Azure to terraform without hardcoding the values or terraform import?
 	use of datatype resouce
+	A data source is accessed via a special kind of resource known as a data resource, declared using a data block:
+	data "aws_ami" "example" {
+  		most_recent = true
+
+  		owners = ["self"]
+  		tags = {
+    			Name   = "app-server"
+    			Tested = "true"
+  			}
+		}
+
 19. If we give count zero in resources level what will happen?
 	ignored by terraform 
 20. What is Dynamic Block in terraform?
