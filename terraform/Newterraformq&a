@@ -34,6 +34,21 @@
 	We will use separate branch for implement before release/mearge we will dicuss internally and do code review once scam call got approval then we can schdeule .
 7. How do you standardize terraform code so that can be shared across multiple teams in an organization?
 	terraform state file locking concept is there . So once you excution terraform untill first task completed you cant re-run again.
+		As multiple users access the same state file, the state file should be locked when it is in use. The locking mechanism helps to prevent such scenarios. It makes sure that at a time, only one person is running the terraform configurations, and there is no conflict.
+		Not all backend support locking. e.g. Azure Blob storage natively supports locking, while Amazon S3 supports using DynamoDB in AWS.
+			
+			terraform {
+  				backend "s3" {
+    				bucket         = "YOUR_S3_BUCKET_NAME"
+   				dynamodb_table = "YOUR_DYNAMODB_TABLE_NAME"
+   				 key            = "prod_terraform.tfstate"
+    				region         = "us-east-1"
+        
+    				#  Authentication
+   				 profile        = "MY_PROFILE"
+ 				 }
+				}
+				
 8. How do you call output of one module in another module?
 	We need to define output variable in module in the name of output.tf name then in other module you can refer that vlue in ref module.nameofmodule.outputvalue
 9. Lets say you have created lot of resources using terraform out of is there way to delete one the resource through Terraform?
