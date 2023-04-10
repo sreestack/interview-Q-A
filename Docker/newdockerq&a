@@ -105,7 +105,100 @@ Docker
 	ENTRYPOINT - A container with an ENTRYPOINT is preferred when you want to define an executable. You can only override it if you use the --entrypoint flag.
 
 	
+27. what is docker multistage file
+	i have all images in it right ? then how can it be light weight 
+	i have ubuntu mechine andgit repo which has code now explain end to end flow continoues deployment 
+28. what are all plugin you have worked on
+	maven integration ,Pipeline ,git,Amazon Elastic Container Service,kubernets,sonorkube,publish over ssh, docker, audit,ansible,
+	what are all custom plugin you worked on
+29.i have docker container in default network how can it connect with container
+	bridge network is default.By use internal port number we can connect
+30.i have a base image like centos:latest , how can i install app on image
+	From Centos:latest
+	run httpd 
+	cmd foregorud 
+	like that you can usecentos image
+
+
+31. how many conatiners are there in pod by default 
+	Each pod have pause container as template then other conatiner what we downloaded 
+	The pause container is a container that exists in each pod, it’s like a template or a parent containers from which all the new containers in the pod inherit the namespaces. The pause container starts, then goes to “sleep”.
+
+	It is a “template” container that reserves the namespaces which are shared among all the containers inside the pod.
+32.what is key difference you find declarative vs scripted way in Jenkins
+
+	declarative and scripted pipelines differ in terms of the programmatic approach on syntax ways :
+	ex: declarative:
+	 pipeline {  
+		agent {    
+         
+			  }   
+
+			stages {   
+				stage("foo") {     
+					steps {
+
+	scripted:
+		node {
+			}
+declarative is better than scripted way /
+in declarive rubi injection not possible but scripted way its possible
+33.what do understand in docker networks
+
+	docker network is if two docker files are exiting in same host they not connect untill if they are same network.
 	
+	bridge: Bridge networks are usually used when your applications run in standalone containers that need to communicate
+	Overlay : networks are best when you need containers running on different Docker hosts to communicate, or when multiple applications work together using swarm services.
+	Macvlan networks:  are best when you are migrating from a VM setup or need your containers to look like physical hosts on your network, each with a unique MAC address.
+	
+34. what are the best ways to create docker files
+	BP 1: Use official and verified Docker Images as Base Image
+	BP 2: Use Specific Docker Image Versions
+	BP 3: Use Small-Sized Official Images
+	BP 4: Optimize Caching Image Layers
+	BP 5: Use .dockerignore files
+	BP 6: Make use of Multi-Stage Builds
+	BP 7: Use the Least Privileged User 
+	BP 8: Scan your Images for Security Vulnerabilities
+	
+35. CMD vs Entrypoint
+	CMD - The CMD describes the default container parameters or commands. The user can easily override the default command when you use this.
+	ENTRYPOINT - A container with an ENTRYPOINT is preferred when you want to define an executable. You can only override it if you use the --entrypoint flag.
+	cmd can passed as argument for entrypoint
+	
+36. ENV vs ARG
+	ARG: ARG instruction defines a variable that can be used to build a Docker image.
+		ARG values are not available after the image is built.
+		In the running container you can’t access the ARG variables.
+		Once ARG variable is defined in the Dockerfile, you can always override the values by passing command line argument as shown below
+
+	ENV: 
+		ENV is to provide default values for your future environment variables inside the container
+		We can’t change the ENV variable using command line argument directly
+		If we need to change the ENV variable using CMD line then we have to use ARG and place ARG variable in ENV variable
+
+37. what are difference between cmd add run
+	RUN - RUN instruction allows you to install your application and packages required for it. It executes any commands on top of the current image and creates a new layer by committing the results. Often you will find multiple RUN instructions in a Dockerfile.
+
+	CMD - CMD instruction allows you to set a default command, which will be executed only when you run container without specifying a command. If Docker container runs with a command, the default command will be ignored. If Dockerfile has more than one CMD instruction, all but last
+	CMD instructions are ignored.
+38.what are the best ways to run cmd and Entrypoint
+39. How can i pass env variavles for while building the images
+40. what are docker volumes
+Are k8 certificates are encrypted or encoded
+what is difference between ingress and Loadbalncer
+If i have a Loadbalncer service and my k8 on premise on VM then how its works?
+have you worked on ArgoCD
+have do you customiaze an AMI in aws ?
+what are all the service you worked on aws
+what is cloud trail
+	To track enter account logs
+how can i store the all the logs of cloud trail
+what is diff between NACL vs Securithgroup
+
+application work flow in ci/cd
+
+SCM --> prepare --> sonorkube
 
 	
 		
