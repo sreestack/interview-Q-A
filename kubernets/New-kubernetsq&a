@@ -468,6 +468,21 @@ What do you think what can be issue?
 		  write data ,other pods/slave dbs can be used for reading the data also when a pod dies a new pod is created as replica-set than dns /Ip will change 
 		  so we cannot force application to write only to master .In this scenario headless service will be used ,which results in a unique dns creation 
 		  so one pod can be used to write data.
+98. How to access pod in another namespace ?
+	You can access a service via it's DNS name (as mentioned by you): servicename.namespace.svc.cluster.local
+
+	You can use that DNS name to reference it in another namespace via a local service:
+
+	kind: Service
+	apiVersion: v1
+	metadata:
+	  name: service-y
+	  namespace: namespace-a
+	spec:
+	  type: ExternalName
+	  externalName: service-y.namespace-b.svc.cluster.local
+	  ports:
+	  - port: 80
 
 #############################################
 
