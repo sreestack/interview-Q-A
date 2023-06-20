@@ -483,6 +483,24 @@ What do you think what can be issue?
 	  externalName: service-y.namespace-b.svc.cluster.local
 	  ports:
 	  - port: 80
+99. What are Ephemeral Containers? & How are Ephemeral Containers used?
+    	Ephemeral containers are a new type of container that are part of the Kubernetes core API. 
+	An Ephemeral Container may be added to an existing Pod for administrative actions like debugging, it runs until it exits, and it won't be restarted. 
+	An ephemeral container runs within the Pod's existing resource allocation and shares common container namespaces.
+How are Ephemeral Containers used?
+	Here are some debugging scenarios that are made easier using ephemeral containers.
+
+Troubleshooting Clusters
+
+I run a service named "apples" that consists of a Go binary running in a distroless container image. One of its pods is suddenly having trouble connecting to a backend service, but since it's a distroless image I can't use kubectl exec to troubleshoot:
+
+	'% 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐞𝐱𝐞𝐜 -𝐢𝐭 𝐚𝐩𝐩𝐥𝐞𝐬-𝟓𝟕𝐛𝐜𝐟𝟒𝟗𝟒𝟖𝟕-𝐝𝐝𝐦𝐩𝐧 -- 𝐬𝐡'
+
+OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "sh": executable file not found in $PATH: unknown
+
+We can use kubectl debug to add an ephemeral container and test the backend service:
+
+	 '% 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐝𝐞𝐛𝐮𝐠 -𝐢𝐭 --𝐢𝐦𝐚𝐠𝐞=𝐛𝐮𝐬𝐲𝐛𝐨𝐱 𝐚𝐩𝐩𝐥𝐞𝐬-𝟓𝟕𝐛𝐜𝐟𝟒𝟗𝟒𝟖𝟕-𝐝𝐝𝐦𝐩𝐧 -- 𝐬𝐡 𝐃𝐞𝐟𝐚𝐮𝐥𝐭𝐢𝐧𝐠 𝐝𝐞𝐛𝐮𝐠 𝐜𝐨𝐧𝐭𝐚𝐢𝐧𝐞𝐫 𝐧𝐚𝐦𝐞 𝐭𝐨 𝐝𝐞𝐛𝐮𝐠𝐠𝐞𝐫-𝟓𝐰𝐯𝐠𝐜.' 
 
 #############################################
 
