@@ -202,7 +202,15 @@ mange jenkins --> global tool config --> add no of jdks
 	2. Test stage : Running smoke and functional test 
 	3. Depoly : publish artifactory to registry  prepare deplo  manifest abd depl on cluster.
 42. How do you handle secrets ?
+	Blue Ocean -- to chcek the staus of job on betterway
+	job history plugin -- to check the logs on every stage
+	job DSL -- > job status 
+	prometheus 
+	influxdb
+	job and stage monitoring 
 
 	Depend on envionment we will use tools like Hashicorp valut,, AWS systems manager, Azure vault
+43. Different types of plugins and usage ?
+	
 	
 	
