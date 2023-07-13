@@ -232,6 +232,7 @@ Concept of Adapter / exporters container discussed !
 	b. kubectl container log containername 
 	c. kubectl exec -it podname /bin/bash ( go inside of conatiner and check the logs)
 	d. if you configured elk ( external montoring tool) then you can chcek it
+	e. kubectl get event --namespace abc-namespace
 43. kubectl cluster logs ?
 	its stored in home/kubecluster folder then you can chcek it
 	
